@@ -1,5 +1,6 @@
 {
   "name": "ffflabel/ffflabel",
+  "version": "0.0.1",
   "config": {
     "vendor-dir": "vendor"
   },
