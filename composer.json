@@ -1,0 +1,21 @@
+{
+  "name": "ffflabel/ffflabel",
+  "config": {
+    "vendor-dir": "vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "FFFlabel\\": ""
+    }
+  },
+  "repositories": [
+    { "type": "vcs", "url": "https://github.com/ffflabel/services.git" }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "ffflabel/services" : "dev-main"
+  },
+  "require-dev": {
+    "kint-php/kint": "^2.2"
+  }
+}
