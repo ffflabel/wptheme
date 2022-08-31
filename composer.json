@@ -1,6 +1,7 @@
 {
   "name": "ffflabel/ffflabel",
   "version": "0.0.1",
+  "type": "wordpress-theme",
   "config": {
     "vendor-dir": "vendor"
   },
