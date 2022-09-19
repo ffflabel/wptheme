@@ -3,9 +3,8 @@ Theme Name: FFFlabel
 Theme URI:
 Author: Timon
 Author URI:
-Template: twentytwentyone
 Description: Theme for company White label
-Version: 0.0.2
+Version: 0.0.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: ffflabel
@@ -14,3 +13,28 @@ Tags:
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
+:root {
+  --container-width: 1000px;
+  --container-padding: 25px;
+  /* Colors: */
+  --color-black: #0E2639;
+  --color-white: #fff;
+  --color-primary: #F31F43;
+  --color-secondary: #3E4CB4;
+  --color-tertiary: #0E2639;
+}
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+  word-break: normal;
+}
+/*# sourceMappingURL=style.css.map */

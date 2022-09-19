@@ -17,7 +17,7 @@ $version = $theme->get('Version');
 define('TEXTDOMAIN', $textdomain ?? 'ffflabel');
 
 define('VERSION', $version ?? '0.0.1');
-define('ASSETS_VERSION', '0.0.1');
+define('ASSETS_VERSION', '0.0.4');
 
 define('ASSETSURL', THEMEURL . '/assets');
 define('ASSETSDIR', THEMEDIR . '/assets');
@@ -30,6 +30,7 @@ define('VENDORDIR', THEMEDIR . DIRECTORY_SEPARATOR . 'vendor');
 ################################################################################
 
 require_once VENDORDIR . '/autoload.php';
+require_once THEMEDIR . '/template-functions.php';
 
 
 ################################################################################
