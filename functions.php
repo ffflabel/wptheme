@@ -23,7 +23,10 @@ define('FFF_ASSETSURL', FFF_THEMEURL . '/assets');
 define('FFF_ASSETSDIR', FFF_THEMEDIR . '/assets');
 
 define('FFF_INCDIR', FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'Inc');
-define('FFF_VENDORDIR', FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'vendor');
+
+if (!defined('FFF_VENDORDIR')) {
+	define('FFF_VENDORDIR', FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'vendor');
+}
 
 ################################################################################
 # Includes
