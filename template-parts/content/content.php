@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying posts
+```` * Template part for displaying posts
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -16,7 +16,6 @@
 			<?php the_title( sprintf( '<h2 class="entry-title default-max-width"><a href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 		<?php endif; ?>
 
-		<?php twenty_twenty_one_post_thumbnail(); ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">

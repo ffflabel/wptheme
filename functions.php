@@ -7,30 +7,30 @@ use FFFlabel\Inc\General;
 # Constants
 ################################################################################
 
-define('THEMEURL', get_stylesheet_directory_uri());
-define('THEMEDIR', __DIR__);
+define('FFF_THEMEURL', get_template_directory_uri());
+define('FFF_THEMEDIR', __DIR__);
 
 $theme = wp_get_theme();
 $textdomain = $theme->get('TextDomain');
 $version = $theme->get('Version');
 
-define('TEXTDOMAIN', $textdomain ?? 'ffflabel');
+define('FFF_TEXTDOMAIN', $textdomain ?? 'ffflabel');
 
-define('VERSION', $version ?? '0.0.1');
-define('ASSETS_VERSION', '0.0.4');
+define('FFF_VERSION', $version ?? '0.0.1');
+define('FFF_ASSETS_VERSION', '0.0.4');
 
-define('ASSETSURL', THEMEURL . '/assets');
-define('ASSETSDIR', THEMEDIR . '/assets');
+define('FFF_ASSETSURL', FFF_THEMEURL . '/assets');
+define('FFF_ASSETSDIR', FFF_THEMEDIR . '/assets');
 
-define('INCDIR', THEMEDIR . DIRECTORY_SEPARATOR . 'Inc');
-define('VENDORDIR', THEMEDIR . DIRECTORY_SEPARATOR . 'vendor');
+define('FFF_INCDIR', FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'Inc');
+define('FFF_VENDORDIR', FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'vendor');
 
 ################################################################################
 # Includes
 ################################################################################
 
-require_once VENDORDIR . '/autoload.php';
-require_once THEMEDIR . '/template-functions.php';
+require_once FFF_VENDORDIR . '/autoload.php';
+require_once FFF_THEMEDIR . '/template-functions.php';
 
 
 ################################################################################
