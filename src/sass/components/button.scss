@@ -1,0 +1,216 @@
+.button {
+  // Main setup
+  all: unset;
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: rem(7px) rem(20px);
+  font-size: rem(14px);
+  font-weight: 600;
+  line-height: rem(21px);
+  border-radius: rem(10px);
+  cursor: pointer;
+  transition: all ease-in .3s;
+  text-decoration: none;
+
+  &:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  &-outline {
+    background: transparent !important;
+    border: 2px solid;
+
+    &--primary {
+      color: color(dark, 200);
+      border-color: color(primary, 200);
+
+      &:hover {
+        border-color: color(primary, 100);
+        color: color(dark, 200);
+      }
+    }
+
+    &--secondary {
+      color: color(dark, 200);
+      border-color: color(secondary, 200);
+
+      &:hover {
+        color: color(dark, 200);
+        border-color: color(secondary, 100);
+      }
+    }
+
+    &--light {
+      color: color(dark, 200);
+      border-color: color(light, 200);
+
+      &:hover {
+        color: color(dark, 200);
+        border-color: color(light, 100);
+      }
+    }
+
+    &--dark {
+      color: color(dark, 200);
+      border-color: color(light, 200);
+      padding: 5px 18px;
+
+      &:hover {
+        color: color(dark, 200);
+        border-color: color(dark, 200);
+      }
+    }
+  }
+
+  // Color schemes
+  &--primary {
+    background: color(primary, 200);
+    color: color(light, 100);
+
+    &:hover {
+      background: color(primary, 100);
+    }
+  }
+
+  &--secondary {
+    background: color(secondary, 200);
+    color: color(light, 100);
+
+    &:hover {
+      background: color(secondary, 100);
+    }
+  }
+
+  &--light {
+    background: color(light, 200);
+    color: color(dark, 100);
+
+    &:hover {
+      background: color(light, 300);
+    }
+  }
+}
+
+.wp-btn {
+
+  a {
+    all: unset;
+    display: flex;
+    width: fit-content;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: rem(7px) rem(20px);
+    font-size: rem(14px);
+    font-weight: 500;
+    line-height: rem(21px);
+    border-radius: rem(10px);
+    cursor: pointer;
+    transition: all ease-in .3s;
+    text-decoration: none;
+  }
+
+  &-outline {
+
+    a {
+      background: transparent !important;
+      border: 2px solid;
+    }
+
+    &--primary a {
+      color: color(dark, 200);
+      border-color: color(primary, 200);
+
+      &:hover {
+        border-color: color(primary, 100);
+      }
+    }
+
+    &--secondary a {
+      color: color(dark, 200);
+      border-color: color(secondary, 200);
+
+      &:hover {
+        border-color: color(secondary, 100);
+      }
+    }
+
+    &--light a {
+      color: color(dark, 200);
+      border-color: color(light, 200);
+
+      &:hover {
+        border-color: color(light, 100);
+      }
+    }
+
+    &--dark a {
+      color: color(dark, 200);
+      border-color: color(light, 200);
+      padding: 5px 18px;
+
+      &:hover {
+        border-color: color(dark, 200);
+      }
+    }
+  }
+
+  // Color schemes
+  &--primary a {
+    background: color(primary, 200);
+    color: color(light, 100);
+
+    &:hover {
+      background: color(primary, 100);
+    }
+  }
+
+  &--secondary a {
+    background: color(secondary, 200);
+    color: color(light, 100);
+
+    &:hover {
+      background: color(secondary, 100);
+    }
+  }
+
+  &--light a {
+    background: color(light, 200);
+    color: color(dark, 100);
+
+    &:hover {
+      background: color(light, 300);
+    }
+  }
+}
+
+input[type="submit"] {
+  all: unset;
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: rem(7px) rem(20px);
+  font-size: rem(14px);
+  font-weight: 500;
+  line-height: rem(21px);
+  border-radius: rem(10px);
+  cursor: pointer;
+  transition: all ease-in .3s;
+  text-decoration: none;
+  background: color(primary, 200);
+  color: color(light, 100);
+
+  &:hover {
+    background: color(primary, 100);
+  }
+
+  &:disabled {
+    background: color(primary, 100);
+  }
+}

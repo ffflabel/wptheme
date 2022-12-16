@@ -1,0 +1,32 @@
+.breadcrumb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: none;
+  padding: 0;
+  margin-block: rem(26px);
+
+  &-item {
+    @include font-setup(11px, 500, 16.5px);
+    color: color(dark, 400);
+
+    + .breadcrumb-item {
+      display: flex;
+      align-items: center;
+
+      &::before {
+        display: flex;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        color: color(primary, 200);
+        content: "\e907";
+        font-family: $icon;
+        font-size: rem(8px);
+      }
+    }
+
+    a {
+      color: color(dark, 400);
+    }
+  }
+}

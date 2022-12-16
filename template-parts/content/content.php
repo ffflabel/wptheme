@@ -6,35 +6,42 @@
  *
  */
 
+$container_class = apply_filters('fff/templates/class', 'container', 'content.php');
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php if ( is_singular() ) : ?>
-			<?php the_title( '<h1 class="entry-title default-max-width">', '</h1>' ); ?>
-		<?php else : ?>
-			<?php the_title( sprintf( '<h2 class="entry-title default-max-width"><a href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-		<?php endif; ?>
+    <div class="<?php print $container_class; ?>">
 
-	</header><!-- .entry-header -->
+        <header class="entry-header">
+            <?php if ( is_singular() ) : ?>
+                <?php the_title( '<h1 class="entry-title default-max-width">', '</h1>' ); ?>
+            <?php else : ?>
+                <?php the_title( sprintf( '<h2 class="entry-title default-max-width"><a href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+            <?php endif; ?>
 
-	<div class="entry-content">
-		<?php
-		the_content();
+        </header><!-- .entry-header -->
 
-		wp_link_pages(
-			array(
-				'before'   => '<nav class="page-links" aria-label="' . esc_attr__( 'Page', 'ffflabel' ) . '">',
-				'after'    => '</nav>',
-				/* translators: %: Page number. */
-				'pagelink' => esc_html__( 'Page %', 'ffflabel' ),
-			)
-		);
+        <div class="entry-content">
+            <?php
+            the_content();
 
-		?>
-	</div><!-- .entry-content -->
+            wp_link_pages(
+                array(
+                    'before'   => '<nav class="page-links" aria-label="' . esc_attr__( 'Page', 'ffflabel' ) . '">',
+                    'after'    => '</nav>',
+                    /* translators: %: Page number. */
+                    'pagelink' => esc_html__( 'Page %', 'ffflabel' ),
+                )
+            );
 
-	<footer class="entry-footer default-max-width">
+            ?>
+        </div><!-- .entry-content -->
 
-	</footer><!-- .entry-footer -->
+        <footer class="entry-footer default-max-width">
+
+        </footer><!-- .entry-footer -->
+
+    </div><!-- .container -->
+
 </article><!-- #post-<?php the_ID(); ?> -->

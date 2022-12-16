@@ -1,0 +1,73 @@
+/* Wordpress Gutenberg overrides */
+
+.wp {
+  &-block {
+    &-separator {
+      border-top: 1px solid color(light, 300);
+      border-bottom: 1px solid color(light, 300);
+      margin-top: rem(70px);
+      margin-bottom: rem(70px);
+    }
+  }
+}
+
+.has-wpdc-text-3-font-size {
+  @include font-setup(14px, 400, 21px);
+}
+
+.entry-title {
+  margin-bottom: rem(26px);
+}
+
+.container {
+  @include media(">phone", "<tablet") {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+.entry-content {
+  ul {
+    margin-bottom: rem(25px);
+
+    li {
+      @include font-setup(16px, 400, 30px);
+      color: color(dark, 400);
+      position: relative;
+      padding-left: rem(25px);
+      @include media("<tablet") {
+        @include font-setup(14px, 400, 26px);
+      }
+
+      &::before {
+        content: "\2022";
+        color: color(primary, 200);
+        font-weight: bold;
+        display: flex;
+        font-size: rem(28px);
+        margin-right: rem(8px);
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+
+  .list-logos {
+    ul {
+      li {
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  h4 {
+    color: color(dark, 400);
+  }
+
+  .has-medium-custom-font-size {
+    @include font-setup(24px, 400, 44px);
+  }
+}

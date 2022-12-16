@@ -1,0 +1,432 @@
+.form {
+  &-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    textarea {
+      resize: none;
+    }
+
+    &-full {
+      grid-column: 1 / 3;
+      width: 100%;
+
+      span {
+        width: 100%;
+      }
+    }
+
+    label {
+      margin-bottom: rem(8px);
+      font-weight: 500;
+      color: color(dark, 800);
+    }
+
+    &.required {
+      label {
+        &::after {
+          content: "*";
+          color: color(primary, 200);
+          display: inline-block;
+        }
+      }
+    }
+
+    @include input {
+      border: 1px solid color(light, 600);
+      padding: rem(13px) rem(15px);
+      border-radius: rem(5px);
+      width: 100%;
+      font-size: rem(14px);
+      min-width: 299px;
+      &:focus {
+        outline: none;
+      }
+
+      @include media("<desktop") {
+        min-width: unset;
+      }
+    }
+  }
+
+  &-contact {
+    &-grid {
+      display: grid;
+      gap: rem(25px) rem(28px);
+      grid-template-columns: 1fr 1fr;
+      justify-items: flex-start;
+      padding-right: rem(45px);
+
+      @include media("<desktop") {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.wpcf7-spinner {
+  display: none;
+}
+
+.wpcf7 form .wpcf7-response-output {
+  display: none;
+  border: none;
+  font-weight: 500;
+  margin: rem(20px) 0;
+  padding: 0;
+}
+
+.wpcf7 form.sent .wpcf7-response-output {
+  display: block;
+  color: color(secondary, 100);
+}
+
+.wpcf7 form.failed .wpcf7-response-output,
+.wpcf7 form.aborted .wpcf7-response-output {
+  display: block;
+  color: color(primary, 200);
+}
+
+.wpcf7-not-valid-tip {
+  margin-top: 5px;
+}
+
+.tracking-form {
+
+  form {
+    display: flex;
+    align-items: center;
+    margin-left: rem(50px);
+
+    @include input {
+      border: 1px solid color(light, 600);
+      padding: rem(13px) rem(15px);
+      border-radius: rem(5px);
+      width: 100%;
+      font-size: rem(14px);
+      min-width: rem(299px);
+      margin-right: rem(20px);
+      &:focus {
+        outline: none;
+      }
+
+      @include media("<desktop") {
+        min-width: unset;
+      }
+    }
+
+  }
+
+}
+
+#tracking-content {
+
+  .tracking-number {
+    h3 {
+      background-color: color(primary, 200);
+      color: color(light, 100);
+      padding: rem(14px) rem(25px) rem(14px) rem(75px);
+      border-radius: rem(10px);
+      width: fit-content;
+      position: relative;
+      @include media("<tablet") {
+        width: auto;
+      }
+
+
+      &:before {
+        content: "\e912";
+        font-family: $icon;
+        color: color(light, 100);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: rem(25px);
+        font-size: 35px;
+      }
+
+      span {
+        margin-left: rem(10px);
+        letter-spacing: 0.07rem;
+        @include media("<tablet") {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .general-tracking-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-block: rem(30px);
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .status {
+      margin-top: 30px;
+      width: 100%;
+    }
+
+    .info,
+    .sender,
+    .receiver {
+      border: 2px solid #dbdbdb;
+      padding: rem(20px);
+      min-width: rem(350px);
+      @include media("<tablet") {
+        margin-bottom: 20px;
+        min-width: 100%;
+      }
+    }
+  }
+
+  .tracking-info {
+    table {
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-collapse: separate;
+
+      thead {
+        tr {
+          background-color: color(secondary, 200);
+          color: color(light, 100);
+
+          th {
+            padding: rem(14px) rem(30px);
+            @include media("<tablet") {
+              font-size: 12px;
+              padding: rem(10px) rem(10px);
+            }
+
+            &:first-child {
+              border-top-left-radius: 10px;
+            }
+
+            &:last-child {
+              border-top-right-radius: 10px;
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          border: 2px solid #dbdbdb;
+
+          td {
+            padding: rem(14px) rem(30px);
+            border-bottom: 2px solid #dbdbdb;
+            @include media("<tablet") {
+              font-size: 12px;
+              padding: rem(10px) rem(10px);
+            }
+
+            &:first-child {
+              border-left: 2px solid #dbdbdb;
+            }
+
+            &:last-child {
+              border-right: 2px solid #dbdbdb;
+            }
+          }
+
+          &:last-child {
+            td:first-child {
+              border-bottom-left-radius: 10px;
+            }
+
+            td:last-child {
+              border-bottom-right-radius: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+select:hover {
+  cursor: pointer;
+}
+
+.dataTables_wrapper {
+
+  select,
+  input[type=search] {
+    border: 1px solid color(light, 600);
+    padding: rem(13px) rem(15px);
+    border-radius: rem(5px);
+    font-size: rem(14px);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .dataTables_length label {
+    select {
+      margin: 0 rem(10px);
+      color: color(dark, 400);
+    }
+  }
+
+  .dataTables_info {
+    color: color(dark, 400);
+    margin-top: rem(20px);
+  }
+
+  .paging_simple .paginate_button {
+    margin-top: rem(20px);
+    color: color(dark, 500) !important;
+    text-decoration: none;
+
+    &:not(.disabled):hover {
+      color: color(dark, 100) !important;
+      font-weight: 600;
+    }
+
+    &.previous:before {
+      content: '\e906';
+      font-family: $icon;
+      text-shadow: none;
+      font-weight: 600;
+      font-size: 15px;
+      color: color(dark, 500);
+    }
+
+    &.next:after {
+      content: '\e908';
+      font-family: $icon;
+      text-shadow: none;
+      font-weight: 600;
+      font-size: 15px;
+      color: color(dark, 500);
+    }
+
+    &.disabled {
+      color: color(dark, 300) !important;
+
+      &:before {
+        color: color(dark, 300);
+      }
+
+      &:after {
+        color: color(dark, 300);
+      }
+    }
+  }
+}
+
+.dataTables_length,
+.dataTables_filter {
+  margin-bottom: rem(20px);
+
+  label {
+    color: color(dark, 400);
+  }
+}
+
+table.tablepress {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-collapse: separate;
+
+  thead {
+    tr {
+      th {
+        background-color: color(secondary, 200);
+        color: color(light, 100);
+        padding: rem(14px) rem(30px);
+        @include media("<tablet") {
+          font-size: 12px;
+          padding: rem(10px) rem(10px);
+        }
+
+        &:first-child {
+          border-top-left-radius: 10px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 10px;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border: 2px solid #dbdbdb;
+
+      td {
+        padding: rem(14px) rem(30px);
+        border-bottom: 2px solid #dbdbdb;
+        line-height: 24px;
+        color: color(dark, 400);
+        @include media("<tablet") {
+          font-size: 12px;
+          padding: rem(10px) rem(10px);
+        }
+
+        &.column-1 div {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          text-align: center;
+          flex-wrap: nowrap;
+
+          @include media("<tablet") {
+            flex-wrap: nowrap;
+            flex-direction: column;
+          }
+
+          p {
+            margin-bottom: 0;
+            margin-left: rem(20px);
+            @include media("<tablet") {
+              margin-left: 0;
+              font-size: 12px;
+            }
+          }
+
+          img {
+            @include media("<tablet") {
+              max-width: rem(30px);
+            }
+          }
+        }
+
+        &:first-child {
+          border-left: 2px solid #dbdbdb;
+          vertical-align: middle;
+        }
+
+        &:last-child {
+          border-right: 2px solid #dbdbdb;
+        }
+      }
+    }
+  }
+
+  tfoot {
+    tr {
+      th {
+        padding: rem(15px) rem(30px);
+
+        &:first-child {
+          border-bottom-left-radius: 10px;
+        }
+
+        &:last-child {
+          border-bottom-right-radius: 10px;
+        }
+      }
+    }
+  }
+}

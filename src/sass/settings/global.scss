@@ -1,0 +1,42 @@
+$colors: (
+        dark:(
+                100: #000000,
+                200: #433C41,
+                300: #848484,
+                400: #565656, // Paragraphs
+                500: #332F32,
+                600: #514E51,
+                700: #D7D7D7,
+                800: #333333,
+        ),
+        light:(
+                100: #FFFFFF,
+                200: #B1B1B1,
+                300: #DCDCDC,
+                400: #A4A4A4,
+                500: #E0E0E0,
+                600: #B7B7B7,
+                700: #F3F3F3,
+                800: #888888,
+                900: #BABABA
+        ),
+        primary:(
+                100: #AD1115,
+                200: #E31E24
+        ),
+        secondary:(
+                100: #2477B2,
+                200: #54A8E4,
+        )
+);
+
+$breakpoints: (
+        'phone': 319px,
+        'tablet': 768px,
+        'desktop': 1024px,
+        'large': 1140px,
+        'extra-large': 1200px
+) !default;
+
+
+$shadow: 0px 16px 24px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);

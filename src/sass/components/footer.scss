@@ -1,0 +1,261 @@
+.site-footer {
+  background: color(dark, 500);
+  padding: rem(53px) 0 rem(31px);
+  color: color(light, 100);
+  margin-top: rem(40px);
+
+  &-accordion {
+    display: none;
+    @include media(">phone", "<desktop") {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+  }
+
+  .accordion-title {
+    &-text {
+      @include media("<tablet") {
+        @include font-setup(16px, 600, 24px);
+      }
+    }
+  }
+
+  .accordion-item .accordion-content {
+    margin: rem(24px) 0 rem(10px);
+  }
+
+  .accordion-icon {
+    font-size: rem(13px);
+  }
+
+  &-outer {
+    display: grid;
+    @include media(">=319px", "<desktop") {
+      grid-template-rows: unset;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @include media(">phone", "<desktop") {
+      flex-direction: column;
+    }
+  }
+
+  &-logo {
+    margin-bottom: rem(48px);
+    @include media("<tablet") {
+      margin-bottom: rem(20px);
+    }
+  }
+
+  &-address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-style: unset;
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: rem(20px);
+
+      [class^="icon-"],
+      [class*=" icon-"] {
+        font-size: rem(22px);
+        margin-right: rem(12px);
+      }
+
+      &.mail {
+        align-items: center;
+
+        a {
+          color: color(secondary, 200);
+          font-size: rem(18px);
+          font-weight: 500;
+          text-decoration: none;
+        }
+      }
+
+      &.location {
+        align-items: flex-start;
+      }
+
+      .location {
+        &-wrapper {
+          display: flex;
+          flex-direction: column;
+          margin-top: rem(-9px);
+        }
+
+        &-item {
+          @include font-setup(13px, 500, 30px);
+          margin-bottom: rem(5px);
+          color: color(light, 100);
+          text-decoration: none;
+
+          a {
+            color: color(light, 100);
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  &-meta {
+    max-width: 30%;
+    @include media(">phone", "<desktop") {
+      max-width: 100%;
+    }
+
+    &-heading {
+      font-size: rem(16px);
+      font-weight: 600;
+      margin-bottom: rem(22px);
+      @include media("<tablet") {
+        margin-top: rem(45px);
+      }
+    }
+
+    &-description {
+      font-size: rem(14px);
+      font-weight: 500;
+      line-height: rem(24px);
+      color: color(light, 400);
+      margin-bottom: rem(20px);
+    }
+
+    &-social {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      p {
+        font-size: rem(16px);
+        margin-right: rem(6px);
+        margin-bottom: 0;
+      }
+
+      &-links {
+        display: flex;
+
+        .social-link-item {
+          text-decoration: none;
+          color: color(light, 100);
+          font-size: rem(24px);
+          margin: 0 rem(2px) 0 rem(12px);
+        }
+      }
+    }
+  }
+
+  &-block {
+    display: grid;
+    grid-template-columns: 22% 24% 54%;
+    min-width: 58%;
+    column-gap: 40px;
+
+    @include media(">phone", "<desktop") {
+      display: none;
+    }
+  }
+
+  &-copyright {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 86px;
+
+    @include media(">phone", "<desktop") {
+      flex-direction: column;
+      justify-content: unset;
+      align-items: flex-start;
+      margin-top: rem(38px);
+    }
+
+    p {
+      @include font-setup(12px, 500, 24px);
+      color: color(light, 400);
+
+      @include media(">phone", "<desktop") {
+        margin-bottom: rem(16px);
+      }
+    }
+  }
+
+  &-privacy {
+    &-block {
+
+      ul {
+        display: flex;
+        flex-direction: row;
+
+        a {
+          @include font-setup(12px, 500, 24px);
+          color: color(light, 400);
+        }
+
+        li {
+          display: flex;
+          margin-right: rem(20px);
+
+          &:after {
+            display: flex;
+            content: "";
+            width: 1px;
+            height: 100%;
+            margin-left: rem(20px);
+            background: color(dark, 600);
+          }
+
+          &:last-child {
+            margin-right: 0;
+
+            &:after {
+              all: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-item {
+    border-right: 2px solid color(dark, 600);
+
+    &:last-child {
+      border-right: none;
+    }
+
+    @include media(">phone", "<desktop") {
+      border-right: none;
+    }
+
+    &-header {
+      @include font-setup(16px, 600, 24px);
+      margin-bottom: rem(20px);
+      color: color(light, 100);
+    }
+
+    ul#footer_two,
+    ul#footer_one {
+      li.menu-item {
+        margin-bottom: rem(10px);
+
+        a {
+          @include font-setup(13px, 500, 19px);
+          color: color(light, 100);
+          text-decoration: none;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

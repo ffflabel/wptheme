@@ -1,0 +1,31 @@
+@mixin input {
+  input[type=text],
+  input[type=number],
+  input[type=phone],
+  input[type=email],
+  input[type=url],
+  input[type=tel],
+  textarea {
+    @content;
+  }
+}
+
+@mixin font-setup( $size, $weight, $line_height) {
+  font-size: rem($size);
+  font-weight: $weight;
+  line-height: rem($line_height);
+}
+
+@mixin icon-setup {
+  [class^="icon-"],
+  [class*=" icon-"] {
+    @content;
+  }
+}
+
+@mixin col-setup {
+  [class^="col-"],
+  [class*=" col-"] {
+    @content;
+  }
+}

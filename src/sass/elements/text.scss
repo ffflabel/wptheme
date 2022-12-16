@@ -1,0 +1,28 @@
+h1 {
+  @include font-setup(36px, 700, 48px);
+  color: color(dark, 100);
+}
+
+h2 {
+  @include font-setup(30px, 700, 45px);
+  color: color(dark, 100);
+  margin-bottom: rem(26px);
+}
+
+h3 {
+  @include font-setup(24px, 700, 36px);
+  color: color(dark, 100);
+}
+
+h4 {
+  @include font-setup(16px, 700, 30px);
+  color: color(dark, 100);
+}
+
+.text {
+  &-brand {
+    @include font-setup(13px, 700, 19px);
+    text-transform: uppercase;
+    color: color(primary, 200);
+  }
+}

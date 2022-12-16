@@ -1,0 +1,508 @@
+.home-slider {
+  position: relative;
+  width: 100%;
+  @include media(">1500px") {
+    height: 740px;
+  }
+
+  &-functions {
+    &-wrapper {
+      display: flex;
+      position: relative;
+      max-width: rem(930px);
+      border-radius: 0px 50px 0px 0px;
+      background: color(light, 100);
+      z-index: 101;
+      padding: rem(33px) rem(50px) rem(33px) 0;
+      height: 100%;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 9999px;
+        height: 100%;
+        background: color(light, 100);
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        left: -9999px;
+      }
+    }
+
+    &-block {
+      display: flex;
+      position: absolute;
+      width: 100vw;
+      bottom: rem(20px);
+      height: rem(252px);
+      z-index: 102;
+      @include media(">phone", "<=1024px") {
+        display: none;
+      }
+
+      .divider {
+        display: block;
+        height: rem(180px);
+        width: 1px;
+        margin: 0 rem(40px);
+        background: color(light, 500);
+        @include media(">phone", "<desktop") {
+          display: none;
+        }
+      }
+
+      .function {
+        &-item {
+          max-width: 240px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+
+          &-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            p {
+              font-size: rem(18px);
+              font-weight: 500;
+              color: color(dark, 200);
+            }
+
+            img {
+              width: 33px;
+              height: 33px;
+              margin-right: rem(20px);
+            }
+          }
+
+          &-action {
+            margin: rem(16px) 0 rem(20px);
+            max-width: inherit;
+
+            p {
+              color: color(dark, 400);
+              @include font-setup(14px, 300, 21px);
+              margin-bottom: 7px;
+            }
+
+            .form-item {
+              max-width: inherit;
+
+              @include input {
+                width: rem(235px);
+                font-size: rem(14px);
+                line-height: 18px;
+                min-width: auto;
+                margin-bottom: rem(23px);
+
+                &::placeholder {
+                  font-weight: 500;
+                  color: color(dark, 100);
+                }
+
+                input[type=submit] {
+                  width: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //Slick
+  &-arrows {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 rem(30px);
+    cursor: pointer;
+
+    [class^="icon-"],
+    [class*=" icon-"] {
+      font-size: 48px;
+      color: color(dark, 200);
+    }
+
+    @include media(">phone", "<=tablet") {
+      display: none;
+    }
+    // Absolute container for arrows
+    &-container {
+      position: absolute;
+      top: 48%;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .arrow-left {
+      position: absolute;
+      left: -80px;
+      margin-top: -100px;
+      @include media(">768px", "<=1140px") {
+        left: -35px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-top: unset;
+      }
+      @include media(">1140px", "<=1600px") {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-top: unset;
+      }
+    }
+
+    .arrow-right {
+      position: absolute;
+      right: -80px;
+      margin-top: -100px;
+      @include media(">768px", "<=1024px") {
+        right: -35px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-top: unset;
+      }
+      @include media(">1024px", "<=1600px") {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-top: unset;
+      }
+    }
+  }
+
+  &-wrapper {
+    @include media("<=tablet") {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease;
+      -webkit-transition: opacity 1s ease;
+    }
+
+    &.slow-view {
+      @include media("<=tablet") {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+  &-item {
+    display: block;
+    position: relative;
+    @include media(">desktop", "<1500px") {
+      height: 90vh;
+      width: max-content;
+    }
+    @include media(">1500px") {
+      height: 90vh;
+      width: max-content;
+    }
+    @include media(">phone", "<desktop") {
+      height: 250px;
+      width: max-content;
+    }
+    @include media("<=tablet") {
+      position: unset;
+    }
+
+    &-counter {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: rem(50px);
+      @include media(">phone", "<desktop") {
+        margin: rem(40px) 0 rem(10px);
+      }
+
+      .counter {
+        &-current {
+          font-size: rem(12px);
+          line-height: rem(18px);
+          font-weight: 500;
+
+          &:after {
+            content: "/";
+            display: inline-block;
+            color: color(light, 900);
+            margin: 0 rem(10px);
+            font-size: rem(14px);
+            line-height: rem(21px);
+          }
+        }
+
+        &-total {
+          font-size: rem(12px);
+          line-height: rem(18px);
+          font-weight: 500;
+        }
+      }
+    }
+
+    &-text {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: -20px;
+      @include media(">phone", "<desktop") {
+        justify-content: flex-end;
+        margin-top: 0;
+      }
+
+      .container {
+        @include media(">1024px", "<=1600px") {
+          padding: 0 rem(60px);
+        }
+      }
+
+      @include media("<=tablet") {
+        position: unset;
+        padding-top: rem(100px);
+      }
+
+      h1 {
+        font-size: rem(44px);
+        line-height: rem(67px);
+        font-weight: 700;
+        @include media(">phone", "<desktop") {
+          font-size: rem(30px);
+          line-height: rem(44px);
+        }
+      }
+
+      p {
+        font-size: rem(16px);
+        line-height: rem(24px);
+        font-weight: 400;
+        color: color(dark, 400);
+        margin-bottom: rem(20px);
+        @include media(">phone", "<desktop") {
+          font-size: rem(14px);
+          line-height: 21px;
+          margin-bottom: rem(15px);
+        }
+      }
+    }
+
+    &-image {
+      @include media("<=tablet") {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        height: 100%;
+      }
+
+      img {
+        max-width: 100%;
+        width: 100%;
+        @include media(">700px", "<1023px") {
+          width: 100% !important;
+        }
+        @include media(">desktop", "<1500px") {
+          height: 740px;
+          object-fit: cover;
+          width: 100% !important;
+          max-width: unset;
+        }
+        @include media(">1500px") {
+          height: 740px;
+          object-fit: cover;
+          width: 100% !important;
+          max-width: unset;
+        }
+        @include media("<=tablet") {
+          height: 100%;
+          object-fit: cover;
+          width: calc(100% + 400px) !important;
+          max-width: unset;
+        }
+      }
+    }
+  }
+}
+
+.test-container {
+  display: flex;
+  position: absolute;
+  width: 100vw;
+  bottom: 5px;
+  background: color(secondary, 200);
+  height: 250px;
+  z-index: 200;
+}
+
+.slider {
+  &-partners {
+    background: color(light, 700);
+
+    .slick-track {
+      margin-left: -120px;
+
+      @include media("<tablet") {
+        margin-left: 0;
+      }
+    }
+
+    &-container {
+      @include media("<tablet") {
+        background: color(light, 700);
+        padding: 0 10px;
+      }
+    }
+  }
+
+  &-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 212px;
+    @include media("<tablet") {
+      width: 120px;
+      height: 139px;
+      padding: 0 10px;
+    }
+
+    img {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+      opacity: 0.2;
+      transition: all 1s;
+    }
+  }
+}
+
+.slick-active {
+  .slider {
+    &-image-container {
+
+      img {
+        -webkit-filter: grayscale(0%);
+        filter: grayscale(0%);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.safariOnly {
+  &::before {
+    content: "";
+    background: none !important;
+  }
+
+  &::after {
+    content: "";
+    background: none !important;
+  }
+}
+
+.masthead-functions {
+  @include media(">1024px") {
+    display: none;
+  }
+  @include media("<=1024px") {
+    .container {
+      padding-left: 0px;
+      padding-right: 0px;
+
+      .home-slider-functions {
+        &-wrapper {
+          display: flex;
+          flex-direction: column;
+          max-width: 100%;
+          padding: 28px 0 0;
+          @include media(">768px") {
+            flex-direction: row;
+          }
+
+          &::before {
+            display: none;
+          }
+
+          .function {
+            &-item {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: space-around;
+              max-width: 100%;
+              border-bottom: 1px solid color(light, 500);
+              margin-bottom: rem(30px);
+              padding-bottom: rem(30px);
+              @include media(">768px") {
+                padding-left: rem(20px);
+                padding-right: rem(20px);
+                border-bottom: none;
+                flex: 1 1 0;
+              }
+
+              &:last-child {
+                border-bottom: none;
+                margin-top: -10px;
+                margin-bottom: rem(25px);
+              }
+
+              &-header {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-bottom: rem(18px);
+
+                img {
+                  height: 33px;
+                }
+
+                p {
+                  margin-left: rem(15px);
+                  @include font-setup(18px, 500, 27px);
+                }
+              }
+
+              &-action {
+                p {
+                  color: color(dark, 300);
+                  @include font-setup(14px, 400, 21px);
+
+                  br {
+                    display: none;
+                  }
+                }
+
+                margin-bottom: rem(25px);
+              }
+
+              @include input {
+                width: rem(190px);
+                font-size: rem(14px);
+                line-height: 18px;
+                min-width: auto;
+                padding-left: rem(27px);
+                margin-bottom: rem(23px);
+
+                &::placeholder {
+                  font-size: 12px;
+                  font-weight: 500;
+                  color: color(dark, 100);
+                }
+
+                input[type=submit] {
+                  width: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

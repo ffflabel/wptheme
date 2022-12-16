@@ -1,0 +1,20 @@
+.alert {
+    padding: rem(15px);
+    margin-bottom: rem(20px);
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0px;
+    @include font-setup(14px, 700, 26px);
+    
+    @include icon-setup{
+        margin-right: rem(20px);
+        font-size: rem(30px);
+    }
+
+    &-danger {
+    background: color(primary, 200) !important;
+    color: color(light, 100) !important;
+    }
+}
