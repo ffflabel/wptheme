@@ -1,5 +1,5 @@
 {
-  "name": "ffflabel/ffflabel",
+  "name": "ffflabel/wptheme",
   "type": "wordpress-theme",
   "autoload": {
     "psr-4": {
