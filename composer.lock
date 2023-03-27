@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a6c08add55d102caf500ce138a70e42",
+    "content-hash": "baef77df12bf4c4bed27800382eab478",
     "packages": [
         {
             "name": "ffflabel/services",
@@ -23,7 +23,6 @@
             "require": {
                 "php": ">=5.3"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -43,7 +42,7 @@
                 "php"
             ],
             "support": {
-                "source": "https://github.com/ffflabel/services/tree/main",
+                "source": "https://github.com/ffflabel/services/tree/develop",
                 "issues": "https://github.com/ffflabel/services/issues"
             },
             "time": "2022-08-30T13:00:50+00:00"
