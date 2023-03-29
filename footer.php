@@ -75,3 +75,4 @@ $container_class = apply_filters('fff/templates/class', 'container', 'footer.php
 
 </body>
 </html>
+<?php do_action('html_document_ready'); ?>

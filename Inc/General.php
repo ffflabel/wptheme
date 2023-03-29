@@ -67,7 +67,7 @@ class General {
 	 */
 	public function registerStyles()
 	{
-		wp_register_style(FFF_TEXTDOMAIN . '-style', FFF_THEMEURL . '/style.css', '', FFF_ASSETS_VERSION);
+		//wp_register_style(FFF_TEXTDOMAIN . '-style', FFF_THEMEURL . '/style.css', '', FFF_ASSETS_VERSION);
 	}
 
 	/**
@@ -75,7 +75,7 @@ class General {
 	 */
 	public function registerScripts()
 	{
-		wp_register_script(FFF_TEXTDOMAIN . '-main', FFF_ASSETSURL . '/js/main.js', ['jquery'], FFF_ASSETS_VERSION, true);
+		wp_register_script(FFF_TEXTDOMAIN . '-main', FFF_ASSETSURL . '/javascript/main.js', ['jquery'], FFF_ASSETS_VERSION, true);
 	}
 
 

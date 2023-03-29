@@ -1,8 +1,16 @@
 @charset "UTF-8";
 /*
+Theme Name:   FFF Label
+Theme URI:    https://ffflabel.com/
+Description:  FFF Label Basic Wordpress Theme
+Author:       FFF Label
+Version:      1.0.0
+Text Domain:  ffflabel
+*/
+/*
 
-This is the critical styles.
-Loading in any case on any device
+This file contains all critical styles.
+Loading in any case on any device each time.
 
 */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

@@ -1,6 +1,7 @@
 <?php
 
 
+use FFFlabel\Inc\AssetsController;
 use FFFlabel\Inc\General;
 
 ################################################################################
@@ -19,9 +20,9 @@ define('FFF_TEXTDOMAIN', $textdomain ?? 'ffflabel');
 define('FFF_ASSETSURL', FFF_THEMEURL . '/assets');
 define('FFF_ASSETSDIR', FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'assets');
 
-
 define('FFF_VERSION', $version ?? '0.0.1');
-define('FFF_ASSETS_VERSION', filemtime(FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'style.css'));
+//define('FFF_ASSETS_VERSION', filemtime(FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'style.css'));
+define('FFF_ASSETS_VERSION', 1);
 
 define('FFF_INCDIR', FFF_THEMEDIR . DIRECTORY_SEPARATOR . 'Inc');
 
@@ -44,3 +45,8 @@ require_once FFF_THEMEDIR . DIRECTORY_SEPARATOR . '/template-functions.php';
 General::instance();
 
 
+// region TEMPORARY connection
+
+AssetsController::instance();
+
+// endregion
