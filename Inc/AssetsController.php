@@ -4,7 +4,6 @@
  * Assets Controller is the main class for the including CSS, JS, icons and images in the theme
  *
  * @todo Add dynamic theme colors, sizes and other variables into the critical file
- * @todo Add JS bundling
  * @todo Add Icons bundling
  * @todo Add Images bundling
  * @todo Add the method to get the first image in the document and preload this image in the head
