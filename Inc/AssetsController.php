@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Assets Controller is the main class for the including CSS, JS, icons and images in the theme
+ *
+ * @todo Add dynamic theme colors, sizes and other variables into the critical file
+ * @todo Add JS bundling
+ * @todo Add Icons bundling
+ * @todo Add Images bundling
+ * @todo Add the method to get the first image in the document and preload this image in the head
+ *
+ */
+
 namespace FFFlabel\Inc;
 
 use FFFlabel\Services\Traits\Singleton;
@@ -10,7 +21,9 @@ class AssetsController {
     use Singleton;
 
     private $_styles = [];
-    private $_critical_bundle = [];
+    private $_scripts = [];
+    private $_styles_critical_bundle = [];
+    private $_scripts_critical_bundle = [];
     private $_lock = [];
     private $_media = [
         'sm' => 500,
@@ -23,8 +36,12 @@ class AssetsController {
     private $_bundle_folder_dir;
     private $_bundle_folder_url;
     private $_bundle_folder_subdirectories = ['css', 'js'];
+    private $_enable_caching = false;
 
     private function __construct() {
+
+        // @todo Check if not PROD. If Prod, that TRUE
+        $this->_enable_caching = false;
 
         $this->addStyle(FFF_TEXTDOMAIN . '-style', FFF_THEMEURL . '/style.css', 'critical', []);
         $this->addStyle(FFF_TEXTDOMAIN . '-style-xs', FFF_THEMEURL . '/style.xs.css', 'xs', []);
@@ -35,13 +52,25 @@ class AssetsController {
         $this->addStyle(FFF_TEXTDOMAIN . '-style-lg', FFF_THEMEURL . '/style.lg.css', 'lg', []);
         $this->addStyle(FFF_TEXTDOMAIN . '-style-lgl', FFF_THEMEURL . '/style.lgl.css', 'lgl', []);
 
+        $this->addScript(FFF_TEXTDOMAIN . '-main', FFF_ASSETSURL . '/javascript/main.js', [], [
+            'ajaxurl'      => admin_url('admin-ajax.php'),
+            'locale'       => get_locale(),
+            'post_id'      => get_the_ID(),
+            'template_uri' => get_stylesheet_directory_uri(),
+        ], false);
+
         add_action('wp_head', function() {
             AssetsController::instance()->bundleStyles();
         }, 999999);
 
         add_action('wp_footer', function() {
             AssetsController::instance()->bundleStyles();
+
         }, 999999);
+
+        add_action('wp_footer', function(){
+            AssetsController::instance()->bundleScripts();
+        });
 
         $this->registerBundleFolders();
 
@@ -57,6 +86,50 @@ class AssetsController {
     }
 
     // region file
+
+    /**
+    *
+     */
+
+    public function simplifyHandle($handle) {
+        return preg_replace("/[^A-Za-z0-9]/", '', $handle);
+    }
+
+    /**
+     *
+     */
+    public function minimize($handle, $css) {
+        $buffer = preg_replace("/_COMSTART.*?COMEND_/s","",str_replace("*/","COMEND_", str_replace("/*","_COMSTART",
+            $css
+        )));
+        return "\n/* " . $handle . " */\n" . str_replace([' )', ') '], ')',
+            str_replace([' (', '( '], '(',
+                str_replace([' ;', '; '], ';',
+                    str_replace([' :', ': '], ':',
+                        str_replace([' }', '} ', ';}'], '}',
+                            str_replace([' {', '{ '], '{',
+                                str_replace([' ,', ', '], ',',
+                                    str_replace('  ', ' ',
+                                        str_replace([' =', '= ', ' = '], '=',
+                                            trim(preg_replace('/\s\s+/', ' ', str_replace([
+                                                        "\n",
+                                                        "\t",
+                                                        "\r"
+                                                    ], ' ',
+                                                        $buffer
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        ) . "\n";
+    }
 
     /**
      * checks is $src is a local file
@@ -95,11 +168,11 @@ class AssetsController {
         $this->_bundle_folder_dir = $upload_dir['basedir'] . '/bundle';
         $this->_bundle_folder_url = $upload_dir['baseurl'] . '/bundle';
         if (!file_exists($this->_bundle_folder_dir)) {
-            mkdir($this->_bundle_folder_dir, 0777, true);
+            wp_mkdir_p($this->_bundle_folder_dir);
         }
         foreach ($this->_bundle_folder_subdirectories as $dir) {
             if (!file_exists($this->_bundle_folder_dir . '/' . $dir)) {
-                mkdir($this->_bundle_folder_dir . '/' . $dir, 0777, true);
+                wp_mkdir_p($this->_bundle_folder_dir . '/' . $dir);
             }
         }
     }
@@ -109,8 +182,17 @@ class AssetsController {
      */
     public function clearBundleFolders() {
         foreach ($this->_bundle_folder_subdirectories as $dir) {
-            rmdir($this->_bundle_folder_dir . '/' . $dir);
+        $dir_path = $this->_bundle_folder_dir . '/' . $dir;
+        if (is_dir($dir_path)) {
+            $files = glob($dir_path . '/*');
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    unlink($file);
+                }
+            }
+            rmdir($dir_path);
         }
+    }
         $this->registerBundleFolders();
     }
 
@@ -135,7 +217,7 @@ class AssetsController {
      * @var $handle - unique string
      * @var $src - url or path
      * @var $media - media query for the css file. Can also has 'critical' value, that means, this file will be bundled to the one of critical calls
-     * @var $depend - array of the other styles handles required for this style
+     * @var $deps - array of the other styles handles required for this style
      */
     public function addStyle(string $handle, string $src, string $media = 'all', array $deps = []) {
         if (isset($this->_styles[$handle])) {
@@ -191,14 +273,14 @@ class AssetsController {
         if ($model['bundled_time'] > 0) return;
 
         foreach ($model['deps'] as $deps_handle) {
-            $this->renderStyle($deps_handle);
+            $this->bundleStyle($deps_handle);
         }
 
         if ($model['critical']) {
             if ($model['is_local']) {
-                $this->_critical_bundle[$handle] = file_get_contents($model['path']);
+                $this->_styles_critical_bundle[$handle] = file_get_contents($model['path']);
             } else {
-                $this->_critical_bundle[$handle] = file_get_contents($model['src']);
+                $this->_styles_critical_bundle[$handle] = file_get_contents($model['src']);
             }
         } else {
             wp_enqueue_style(
@@ -223,61 +305,155 @@ class AssetsController {
             $this->bundleStyle($handle);
         }
 
-        if (!empty($this->_critical_bundle)) {
+        if (!empty($this->_styles_critical_bundle)) {
 
-            $hash = array_keys($this->_critical_bundle);
-            asort($hash);
-            $hash = md5(implode($hash));
-            $filepath = $this->_bundle_folder_dir . '/css/' . $hash . '.css';
-            $fileurl = $this->_bundle_folder_url . '/css/' . $hash . '.css';
-            if (!file_exists($filepath)) {
-                $bundle = '';
-                foreach ($this->_critical_bundle as $handle => $css) {
-                    $buffer = preg_replace("/_COMSTART.*?COMEND_/s","",str_replace("*/","COMEND_", str_replace("/*","_COMSTART",
-                        $css
-                    )));
-
-                    $bundle .= "\n/* " . $handle . " */\n" . str_replace([' )', ') '], ')',
-                        str_replace([' (', '( '], '(',
-                            str_replace([' ;', '; '], ';',
-                                str_replace([' :', ': '], ':',
-                                    str_replace([' }', '} ', ';}'], '}',
-                                        str_replace([' {', '{ '], '{',
-                                            str_replace([' ,', ', '], ',',
-                                                str_replace('  ', ' ',
-                                                    str_replace([' =', '= ', ' = '], '=',
-                                                        trim(preg_replace('/\s\s+/', ' ', str_replace([
-                                                                    "\n",
-                                                                    "\t",
-                                                                    "\r"
-                                                                ], ' ',
-                                                                    $buffer
-                                                                )
-                                                            )
-                                                        )
-                                                    )
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    ) . "\n";
+            if ($this->_enable_caching) {
+                $hash = array_keys($this->_styles_critical_bundle);
+                asort($hash);
+                $hash = md5(implode($hash));
+                $filepath = $this->_bundle_folder_dir . '/css/' . $hash . '.css';
+                $fileurl = $this->_bundle_folder_url . '/css/' . $hash . '.css';
+                if (!file_exists($filepath)) {
+                    $bundle = '';
+                    foreach ($this->_styles_critical_bundle as $handle => $css) {
+                        $bundle .= $this->minimize($handle, $css);
+                    }
+                    file_put_contents($filepath, $bundle);
+                } else {
+                    $bundle = file_get_contents($filepath);
                 }
-                file_put_contents($filepath, $bundle);
             } else {
-                $bundle = file_get_contents($filepath);
+                $bundle = '';
+                foreach ($this->_styles_critical_bundle as $handle => $css) {
+                    $bundle .= $this->minimize($handle, $css);
+                }
             }
+
             echo '<style data-style_type="critical">' . $bundle . '</style>';
 
-            $this->_critical_bundle = [];
+            $this->_styles_critical_bundle = [];
         }
 
     }
     // endregion
 
     // region js
+    /**
+     * add the scripts to the bundle to render on the final step
+     * @var $handle - unique string
+     * @var $src - url or path
+     * @var $deps - array of the other scripts handles required for this script
+     * @var @variables - array of the variables, available for this script
+     */
+    public function addScript(string $handle, string $src, array $deps = [], array $variables = [], bool $critical = false) {
+        if (isset($this->_scripts[$handle])) {
+            return $this->_scripts[$handle];
+        }
+
+        $path = null;
+
+        if (!$critical) {
+            wp_register_script($handle, $src, $deps, FFF_ASSETS_VERSION, false);
+        } else {
+            $path = $this->convertLocalFileSrcToLocalFilePath($src);
+        }
+
+        $this->_scripts[$handle] = [
+            'src'       => $src,
+            'path'      => $path,
+            'is_local'  => $path !== null,
+            'critical'  => $critical,
+            'deps'      => $deps,
+            'variables' => $variables,
+            'added_time'=> microtime(),
+            'bundled_time' => 0
+        ];
+
+        return $this->_scripts[$handle];
+    }
+
+    /**
+     * bundles the single script file
+     */
+    private function bundleScript($handle) {
+        if (!isset($this->_scripts[$handle])) return;
+
+        $model = $this->_scripts[$handle];
+
+        if ($model['bundled_time'] > 0) return;
+
+        foreach ($model['deps'] as $deps_handle) {
+            $this->bundleScript($deps_handle);
+        }
+
+
+
+        if ($model['critical']) {
+            $content = '';
+
+            if (!empty($model['variables'])) {
+                $content = 'window[\'' . $this->simplifyHandle($handle) . '\'] = ' . json_encode($model['variables']) . ';';
+            }
+            if ($model['is_local']) {
+                $content .= file_get_contents($model['path']);
+            } else {
+                $content .= file_get_contents($model['src']);
+            }
+            $this->_scripts_critical_bundle[$handle] = $content;
+        } else {
+            if (!empty($model['variables'])) {
+                wp_localize_script($handle, $this->simplifyHandle($handle), $model['variables']);
+            }
+
+            wp_enqueue_script($handle);
+        }
+
+
+
+        $this->_scripts[$handle]['bundled_time'] = microtime();
+
+    }
+
+    /**
+    * bundles the hall current scope of the scripts
+    */
+    public function bundleScripts() {
+        foreach ($this->_scripts as $handle => $model) {
+            $this->bundleScript($handle);
+        }
+
+        if (!empty($this->_scripts_critical_bundle)) {
+
+            if ($this->_enable_caching) {
+                $hash = array_keys($this->_scripts_critical_bundle);
+                asort($hash);
+                $hash = md5(implode($hash));
+                $filepath = $this->_bundle_folder_dir . '/js/' . $hash . '.css';
+                $fileurl = $this->_bundle_folder_url . '/js/' . $hash . '.css';
+                if (!file_exists($filepath)) {
+                    $bundle = '';
+                    foreach ($this->_scripts_critical_bundle as $handle => $js) {
+                        $bundle .= $this->minimize($handle, $js);
+                    }
+                    file_put_contents($filepath, $bundle);
+                } else {
+                    $bundle = file_get_contents($filepath);
+                }
+            } else {
+                $bundle = '';
+                foreach ($this->_scripts_critical_bundle as $handle => $js) {
+                    $bundle .= $this->minimize($handle, $js);
+                }
+            }
+
+
+            echo '<script data-script_type="critical">' . $bundle . '</script>';
+
+            $this->_scripts_critical_bundle = [];
+        }
+
+    }
+
     // endregion
 
     // region icon

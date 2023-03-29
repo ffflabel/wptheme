@@ -75,7 +75,7 @@ class General {
 	 */
 	public function registerScripts()
 	{
-		wp_register_script(FFF_TEXTDOMAIN . '-main', FFF_ASSETSURL . '/javascript/main.js', ['jquery'], FFF_ASSETS_VERSION, true);
+		//wp_register_script(FFF_TEXTDOMAIN . '-main', FFF_ASSETSURL . '/javascript/main.js', ['jquery'], FFF_ASSETS_VERSION, true);
 	}
 
 
@@ -84,17 +84,17 @@ class General {
 	 */
 	public function enqueueScripts()
 	{
-		wp_enqueue_style(FFF_TEXTDOMAIN . '-style');
+//		wp_enqueue_style(FFF_TEXTDOMAIN . '-style');
 //		wp_enqueue_style(TEXTDOMAIN . '-style_sm');
 //		wp_enqueue_style(TEXTDOMAIN . '-style_lg');
 
-		wp_enqueue_script(FFF_TEXTDOMAIN . '-main');
-		wp_localize_script(FFF_TEXTDOMAIN . '-main', 'variables', [
-			'ajaxurl'      => admin_url('admin-ajax.php'),
-			'locale'       => get_locale(),
-			'post_id'      => get_the_ID(),
-			'template_uri' => get_stylesheet_directory_uri(),
-		]);
+//		wp_enqueue_script(FFF_TEXTDOMAIN . '-main');
+//		wp_localize_script(FFF_TEXTDOMAIN . '-main', 'variables', [
+//			'ajaxurl'      => admin_url('admin-ajax.php'),
+//			'locale'       => get_locale(),
+//			'post_id'      => get_the_ID(),
+//			'template_uri' => get_stylesheet_directory_uri(),
+//		]);
 	}
 
 	public function registerSidebars() {
