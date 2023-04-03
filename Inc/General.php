@@ -53,6 +53,17 @@ class General {
 
 		add_theme_support('menus');
 		register_nav_menus(['primary' => 'Primary menu', 'footer' => 'Footer menu', 'mobile-menu' => 'Mobile menu']);
+
+		################################################################################
+		# Blocks
+		################################################################################
+
+		if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
+			add_filter( 'block_categories_all', [$this, 'registerLayoutCategory'] );
+		} else {
+			add_filter( 'block_categories', [$this, 'registerLayoutCategory'] );
+		}
+
 	}
 
 	public function startSession()
@@ -116,6 +127,16 @@ class General {
 				register_sidebar($sidebar);
 			}
 		}
+	}
+
+	public function registerLayoutCategory($categories)
+	{
+		$categories[] = array(
+			'slug'  => 'fffblocks',
+			'title' => 'White Label Blocks'
+		);
+
+		return $categories;
 	}
 
 	public function initImageSizes()
