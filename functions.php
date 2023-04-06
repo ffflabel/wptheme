@@ -2,6 +2,7 @@
 
 
 use FFFlabel\Inc\General;
+use FFFlabel\Services\Gutenberg;
 
 ################################################################################
 # Constants
@@ -42,5 +43,6 @@ require_once FFF_THEMEDIR . DIRECTORY_SEPARATOR . '/template-functions.php';
 ################################################################################
 
 General::instance();
+Gutenberg::instance();
 
 
