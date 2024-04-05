@@ -1,6 +1,5 @@
 <?php
 
-
 use FFFlabel\Inc\General;
 use FFFlabel\Services\Gutenberg;
 
@@ -11,7 +10,7 @@ use FFFlabel\Services\Gutenberg;
 define('FFF_THEMEURL', get_template_directory_uri());
 define('FFF_THEMEDIR', __DIR__);
 
-$theme = wp_get_theme();
+$theme = wp_get_theme('ffflabel');
 $textdomain = $theme->get('TextDomain');
 $version = $theme->get('Version');
 
