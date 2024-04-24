@@ -1,7 +1,7 @@
 <?php
 
-
 use FFFlabel\Inc\General;
+use FFFlabel\Services\Gutenberg;
 
 ################################################################################
 # Constants
@@ -10,7 +10,7 @@ use FFFlabel\Inc\General;
 define('FFF_THEMEURL', get_template_directory_uri());
 define('FFF_THEMEDIR', __DIR__);
 
-$theme = wp_get_theme();
+$theme = wp_get_theme('ffflabel');
 $textdomain = $theme->get('TextDomain');
 $version = $theme->get('Version');
 
@@ -42,5 +42,6 @@ require_once FFF_THEMEDIR . DIRECTORY_SEPARATOR . '/template-functions.php';
 ################################################################################
 
 General::instance();
+Gutenberg::instance();
 
 
