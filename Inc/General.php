@@ -79,6 +79,7 @@ class General {
 	public function registerStyles()
 	{
 		wp_register_style(FFF_TEXTDOMAIN . '-style', FFF_THEMEURL . '/style.css', '', FFF_ASSETS_VERSION);
+		wp_register_style(FFF_TEXTDOMAIN . '-main-style', FFF_ASSETSURL . '/css/style.css', '', FFF_ASSETS_VERSION);
 	}
 
 	/**
@@ -96,6 +97,7 @@ class General {
 	public function enqueueScripts()
 	{
 		wp_enqueue_style(FFF_TEXTDOMAIN . '-style');
+		wp_enqueue_style(FFF_TEXTDOMAIN . '-main-style');
 //		wp_enqueue_style(TEXTDOMAIN . '-style_sm');
 //		wp_enqueue_style(TEXTDOMAIN . '-style_lg');
 
