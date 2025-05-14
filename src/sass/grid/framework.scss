@@ -36,12 +36,12 @@
   @mixin calc-grid-column($index, $class, $type) {
     @if ($type == width) and ($index > 0) {
       .col-#{$class}-#{$index} {
-        width: math.div($index, $grid-columns);
+        width: percentage(math.div($index, $grid-columns));
       }
     }
     @if ($type == push) and ($index > 0) {
       .col-#{$class}-push-#{$index} {
-        left: math.div($index, $grid-columns);
+        left: percentage(math.div($index, $grid-columns));
       }
     }
     @if ($type == push) and ($index == 0) {
@@ -51,7 +51,7 @@
     }
     @if ($type == pull) and ($index > 0) {
       .col-#{$class}-pull-#{$index} {
-        right: math.div($index, $grid-columns);
+        right: percentage(math.div($index, $grid-columns));
       }
     }
     @if ($type == pull) and ($index == 0) {
@@ -61,7 +61,7 @@
     }
     @if ($type == offset) {
       .col-#{$class}-offset-#{$index} {
-        margin-left: math.div($index, $grid-columns);
+        margin-left: percentage(math.div($index, $grid-columns));
       }
     }
   }
